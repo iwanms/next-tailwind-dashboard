@@ -7,9 +7,9 @@ export default function Home() {
   const router = useRouter();
   return (
     <>
-      <div className="flex justify-center mt-16">
+      <div className="flex justify-center mt-10">
         <div style={{ minWidth: "30%" }}>
-          <div className="shadow-lg flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+          <div className="shadow-lg flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <div className="flex justify-center">
                 <Image

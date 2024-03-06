@@ -23,14 +23,34 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
 import Logo from "../components/logo.png";
+import {
+  AccountCircle,
+  Help,
+  LibraryBooks,
+  LiveHelp,
+  Mail,
+  PeopleAlt,
+  QueryStats,
+  Recommend,
+  Settings,
+  SpaceDashboard,
+  Work,
+} from "@mui/icons-material";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const drawerWidth = 240;
 
-function Sidenav(props) {
+function Layout(props) {
   const { window } = props;
+  const { children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isCollapse, setIsCollapse] = React.useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  console.log("Pathname : ", pathname);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -62,7 +82,7 @@ function Sidenav(props) {
           className="-ml-2 mr-2"
         />
         <Typography variant="h6" noWrap component="div">
-          Cashier
+          Berewek
         </Typography>
       </Toolbar>
       <Divider />
@@ -74,21 +94,59 @@ function Sidenav(props) {
           "Projects",
           "Message",
           "Settings",
+          "Profile",
         ].map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem
+            key={text}
+            disablePadding
+            className={
+              pathname.startsWith("/" + text.toLowerCase())
+                ? "text-sky-600 bg-slate-100"
+                : "text-slate-700"
+            }
+            onClick={() => {
+              router.push("/" + text.toLowerCase());
+            }}
+          >
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ListItemIcon
+                className={
+                  pathname.startsWith("/" + text.toLowerCase())
+                    ? "text-sky-600 bg-slate-100"
+                    : "text-slate-700"
+                }
+              >
+                {index === 0 && <SpaceDashboard />}
+                {index === 1 && <QueryStats />}
+                {index === 2 && <PeopleAlt />}
+                {index === 3 && <Work />}
+                {index === 4 && <Mail />}
+                {index === 5 && <Settings />}
+                {index === 6 && <AccountCircle />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
         <Divider />
-        <ListItem disablePadding onClick={handleCollapse}>
+        <ListItem
+          disablePadding
+          onClick={handleCollapse}
+          className={
+            pathname.startsWith("/help")
+              ? "text-sky-600 bg-slate-100"
+              : "text-slate-700"
+          }
+        >
           <ListItemButton>
-            <ListItemIcon>
-              <MailIcon />
+            <ListItemIcon
+              className={
+                pathname.startsWith("/help")
+                  ? "text-sky-600 bg-slate-100"
+                  : "text-slate-700"
+              }
+            >
+              <Help />
             </ListItemIcon>
             <ListItemText primary="Help" />
             {isCollapse ? <ExpandMoreIcon /> : <ExpandLessIcon />}
@@ -99,10 +157,26 @@ function Sidenav(props) {
       <Collapse in={isCollapse} timeout="auto" unmountOnExit>
         <List className="ml-4">
           {["Support", "Contact", "Dosc"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem
+              key={text}
+              disablePadding
+              className={
+                pathname.startsWith("/" + text.toLowerCase())
+                  ? "text-sky-600 bg-slate-100"
+                  : "text-slate-700"
+              }
+            >
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <ListItemIcon
+                  className={
+                    pathname.startsWith("/" + text.toLowerCase())
+                      ? "text-sky-600 bg-slate-100"
+                      : "text-slate-700"
+                  }
+                >
+                  {index === 0 && <LibraryBooks />}
+                  {index === 1 && <Recommend />}
+                  {index === 2 && <LiveHelp />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -140,7 +214,7 @@ function Sidenav(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Dashboard
+            {/* Dashboard */}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -192,46 +266,19 @@ function Sidenav(props) {
         }}
       >
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <main>{children}</main>
       </Box>
     </Box>
   );
 }
 
-Sidenav.propTypes = {
+Layout.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * Remove this when copying and pasting into your project.
    */
   window: PropTypes.func,
+  children: PropTypes.array,
 };
 
-export default Sidenav;
+export default Layout;
